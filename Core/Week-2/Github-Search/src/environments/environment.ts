@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  access_token: "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"
+
 };
 
 /*
