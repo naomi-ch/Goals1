@@ -24,11 +24,11 @@ class Contact:
 
   def delete_contact(self):
 
-        '''
-        delete_contact method deletes a saved contact from the contact_list
-        '''
+      '''
+      delete_contact method deletes a saved contact from the contact_list
+      '''
 
-        Contact.contact_list.remove(self)
+      Contact.contact_list.remove(self)
 
 
   @classmethod
@@ -47,7 +47,30 @@ class Contact:
                   return contact
 
 
+  @classmethod
+  def contact_exists(cls,number):
+      ''' 
+      Method that checks if a contact exists from contact list
 
+      Args:
+            number: Phone number to search if it exists
+      Returns:
+            Boolean: True or false depending if the contact exists
+      '''
+
+      for contact in cls.contact_list:
+            if contact.phone_number == number:
+                  return True 
+
+      return False
+
+
+  @classmethod
+  def display_contacts(cls):
+        ''' 
+        method that returns contact list
+        '''
+        return cls.contact_list
 
 
     
