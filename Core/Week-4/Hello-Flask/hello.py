@@ -8,3 +8,6 @@ def index(): #index() is a VIEW FUNCTION. It is the handler for the route define
 
 if __name__ == '__main__':
     app.run(debug = True) #run() method that launches flask development server
+
+
+#* Debugger PIN: 811-541-671
