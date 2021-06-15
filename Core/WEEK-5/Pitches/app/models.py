@@ -28,7 +28,16 @@ class User(UserMixin,db.Model): #helps us create new users
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute') #blocks access to the password property
-      
+    
+    @password.setter
+    def password(self,password): #method
+        self.password_hash = generate_password_hash(password)
+    
+    def verify_password(self,password): #check if password is the same
+        return check_password_hash(self.password_hash,password)
+
+        #repr? check what it is 
+
 
 
 
