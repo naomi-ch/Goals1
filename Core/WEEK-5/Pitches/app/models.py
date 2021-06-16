@@ -42,3 +42,27 @@ class User(UserMixin,db.Model): #helps us create new users
 
 
 #Comment model
+class Comment(db.Model): #pass db class to create a connection to our database
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer,primary_key = True)
+    pitch_id = db.Column(db.Integer)
+    pitch_comment = db.Column(db.String)
+    posted = db.Column(db.DateTime,default = datetime.utcnow)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id")) #Foreign key stores the id of the person who posted the comment
+
+    def save_comments(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def clear_comments(cls):
+        Comment.all_comments.clear()
+    
+    @classmethod
+    def get_comments(cls,id):
+        comments = Comment.query.filter_by(pitch_id = id).all() #create a pitch model. and a pitch submit form. 
+        return comments
+
+
+
+#Pitch Model?
