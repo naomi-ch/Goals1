@@ -10,7 +10,8 @@ from flask_mail import Mail
 bootstrap = Bootstrap() #bootstrap instance
 db = SQLAlchemy() #create a db(database) instance
 
-login_manager = LoginManager
+
+login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 
@@ -33,10 +34,10 @@ def create_app(config_name):
 
     #Registering the bluepring
     from .main import main as main_blueprint
-    app.register_blueprint(main.blueprint)
+    app.register_blueprint(main_blueprint)
 
     from .auth import auth as auth_blueprint
-    app.register_blueprint(auth.blueprint,url_prefix = '/authenticate')
+    app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
 
     #Setting config - MIGHT NOT NEED BUT OBVS DOUBLE CHECK. SEE THE LMS OR ASK BARCLAY
     #from .request import configure_request

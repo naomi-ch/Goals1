@@ -1,8 +1,8 @@
 from . import db
-from werkzeug.security import generate_password
+from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
-#from datetime import datetime
+from datetime import datetime
 #In watchlist there is a review class, for pitches make a view models potentially
 
 @login_manager.user_loader #decorator
@@ -11,11 +11,11 @@ def load_user(user_id):
 
 
 #Pitch Model
-class Pitch: #should there be db.Model?
-    '''
-    Pitch class to define Pitch objects
-    '''
-    def __init__(self,id,title,):
+#class Pitch: #should there be db.Model?
+    #'''
+    #Pitch class to define Pitch objects
+    #'''
+    #def __init__(self,id,title,):
 
 #User Model
 class User(UserMixin,db.Model): #helps us create new users
@@ -24,7 +24,7 @@ class User(UserMixin,db.Model): #helps us create new users
     '''
     __tablename__ = 'users' #allows us to give users in database proper names
 
-    id = db.Column(db.Interger,primary_key = True)
+    id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255), index = True)
     email = db.Column(db.String(255), unique = True, index = True)
     #role id?

@@ -21,8 +21,8 @@ class Config:
     def init_app(app):
         pass
 
-#class TestConfig(Config):
-    #SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://naomichika1:220197@localhost/pitches_test' # THIS IS POSTGRES TEST 
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://naomichika1:220197@localhost/pitches_test' # THIS IS POSTGRES TEST 
 
 
 class ProdConfig(Config):
@@ -42,12 +42,12 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    #SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://naomichika1:220197@localhost/pitches'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://naomichika1:220197@localhost/pitches'
 
     DEBUG = True
 
 config_options = {
     'development':DevConfig,
-    'production':ProdConfig
-    #'test':TestConfig
+    'production':ProdConfig,
+    'test':TestConfig
 }
