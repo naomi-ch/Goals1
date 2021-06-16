@@ -12,8 +12,11 @@ def index():
     View root page function that returns the index page and its data
     '''
 
+    title = 'Welcome to Pitches'
+    return render_template('index.html', title = title) #add pitches?
 
-@main.route('/pitch/<int:id>')
+#pitch route
+#@main.route('/pitch/<int:id>')
 
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
