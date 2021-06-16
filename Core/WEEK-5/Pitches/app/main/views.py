@@ -34,10 +34,17 @@ def new_comment(id):
         return redirect(url_for('.pitch', id = pitch.id))
     
     title = f'{pitch.title} comments' #double check if this is what you want the title to be. should it even be a new page? new page with all the comments.
-    return render_template('new_comment.html', title = title, comment_form = form,pitch = pitch)
+    return render_template('new_comment.html', title = title, comment_form = form,pitch = pitch) #SHOLD WE HAVE AN HTML FOR NEW_COMMENT?
 
+#Profile Route
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first() #query the databse to find 'user' according to username passed
 
-#profileroute
+    if user is None: #if no user is found then 'abort'
+        abort(404)
+    return render_template("profile/profile.html", user = user)
+
 
 #updateprofile route
 
