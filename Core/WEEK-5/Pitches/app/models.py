@@ -9,7 +9,15 @@ from . import login_manager
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-#User model
+
+#Pitch Model
+class Pitch: #should there be db.Model?
+    '''
+    Pitch class to define Pitch objects
+    '''
+    def __init__(self,id,title,):
+
+#User Model
 class User(UserMixin,db.Model): #helps us create new users
     '''
     User class to define User objects and database table content
@@ -36,12 +44,13 @@ class User(UserMixin,db.Model): #helps us create new users
     def verify_password(self,password): #check if password is the same
         return check_password_hash(self.password_hash,password)
 
-        #repr? check what it is 
+    def __repr__(self):
+        return f'User {self.username}'
 
 
 
 
-#Comment model
+#Comment Model
 class Comment(db.Model): #pass db class to create a connection to our database
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
@@ -65,4 +74,3 @@ class Comment(db.Model): #pass db class to create a connection to our database
 
 
 
-#Pitch Model?
