@@ -27,6 +27,7 @@ class User(UserMixin,db.Model): #helps us create new users
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255), index = True)
     email = db.Column(db.String(255), unique = True, index = True)
+    bio = db.Column(db.String(255))
     #role id?
     #bio?
     comments = db.relationship ('Comment',backref = 'user', lazy = "dynamic") #define relationship between user and comment?
