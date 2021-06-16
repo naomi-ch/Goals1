@@ -7,7 +7,7 @@ from .. import db
 from ..email import mail_message
 
 
-@auth.route('/login', methods = ['GET', 'POST'])
+@auth.route('/login', methods = ["GET", "POST"])
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
@@ -27,3 +27,20 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("main.index"))
+
+
+@auth.route('/register', methods = ["GET","POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(email = form.email.data, username = form.username.data, password = form.password.data)
+
+        db.session.add(user)
+        db.session.commit()
+
+        mail_message("Welcome to Pitches", "email/welcome_user", "user.email", user = user) # please double check this
+
+        return redirect(url_for('auth.login')) #auth.login is refering to the login.html in the auth template folder
+
+        title = "New Account"
+    return render_template('auth/register.html', registration_form = form)
