@@ -1,0 +1,13 @@
+{% macro displayPitches(pitch_list) %}
+
+    {% for pitch in pitch_list %} <!--loop through pitch objects-->
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 pitch card">
+            <h2>
+              <a href="/pitch/{{pitch.id}}"> <!--links to actual pitch-->
+              {{pitch.title}} </a>
+            </h2> 
+        </div>
+      {% endfor %}
+
+{% endmacro %}
+            
