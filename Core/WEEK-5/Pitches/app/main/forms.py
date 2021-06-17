@@ -10,3 +10,6 @@ class CommentForm(FlaskForm):
 
 
 #update profile form
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about yourself',validators =[Required()])
+    submit = SubmitField('Submit')
