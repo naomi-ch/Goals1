@@ -1,7 +1,7 @@
 from flask import render_template,redirect,url_for,abort #add request if it is needed
 from . import main
 from ..models import User,Comment #add other classes if theyre any
-from .forms import CommentForm #add updateprofile form
+from .forms import CommentForm,UpdateProfile #add updateprofile form
 from flask_login import login_required,current_user
 from .. import db #we need the db when saving profile info changes to database
 
@@ -51,8 +51,9 @@ def profile(uname):
 @login.required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
+
     if user is None:
-        abort
+        abort(404)
     
     form = UpdateProfile() #form from main/forms.py
 
