@@ -12,11 +12,14 @@ def index():
     View root page function that returns the index page and its data
     '''
 
-    title = 'Welcome to Pitches'
-    return render_template('index.html', title = title) #add pitches?
+    pitch_all = get_pitch('pitches') #might have to change name of 'pitches'
 
-#pitch route
+    title = 'Welcome to Pitches'
+    return render_template('index.html', title = title, pitches = pitch_all) #add pitches?
+
+#pitch route for when you click on a pitch title on main page. 
 #@main.route('/pitch/<int:id>')
+#get_pitch(id)
 
 
 @main.route('/pitch/comment/new/<int:id>', methods = ['GET','POST'])
@@ -31,7 +34,7 @@ def new_comment(id):
       
         new_comment = Comment(pitch_id = pitch.id, pitch_title = pitch.title,pitch_comment = comment,user = current_user) #create a pitch model
         new_coment.save_comments() #should it be save_comment()?
-        return redirect(url_for('.pitch', id = pitch.id))
+        return redirect(url_for('.pitch', id = pitch.id)) #pitch template/pitch form
     
     title = f'{pitch.title} comments' #double check if this is what you want the title to be. should it even be a new page? new page with all the comments.
     return render_template('new_comment.html', title = title, comment_form = form,pitch = pitch) #SHOLD WE HAVE AN HTML FOR NEW_COMMENT?
