@@ -1,7 +1,7 @@
 from flask import render_template,redirect,url_for,abort #add request if it is needed
 from . import main
 from ..models import User,Comment #add other classes if theyre any
-from .forms import CommentForm #import forms once created
+from .forms import CommentForm #add updateprofile form
 from flask_login import login_required,current_user
 from .. import db #we need the db when saving profile info changes to database
 
@@ -37,7 +37,7 @@ def new_comment(id):
     return render_template('new_comment.html', title = title, comment_form = form,pitch = pitch) #SHOLD WE HAVE AN HTML FOR NEW_COMMENT?
 
 #Profile Route
-@main.route('/user/<uname>')
+@main.route('/user/<uname>') #maybe do 'pitch/user/<uname>' and then redirect to the profile html
 def profile(uname):
     user = User.query.filter_by(username = uname).first() #query the databse to find 'user' according to username passed
 
@@ -47,5 +47,22 @@ def profile(uname):
 
 
 #updateprofile route
+@main.route('/user/<uname>/update', methods = ["GET","POST"])
+@login.required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+    if user is None:
+        abort
+    
+    form = UpdateProfile() #form from main/forms.py
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile, uname = user.username'))
+    return render_template('profile/update.html', form = form)
 
 #update pic?
