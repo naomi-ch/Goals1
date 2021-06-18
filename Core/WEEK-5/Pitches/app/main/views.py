@@ -27,10 +27,6 @@ def pitch(id):
     pitch = get_pitch(id)
     title = f'{pitch.title}'
     comments = Comment.get_comments(pitch.id)
-
-    if comments is None:
-        
-    
     return render_template('pitch.html', title = title, pitch = pitch, comments = comments)
 
 
@@ -63,7 +59,7 @@ def profile(uname):
 
 #updateprofile route
 @main.route('/user/<uname>/update', methods = ["GET","POST"])
-@login.required
+@login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
 
