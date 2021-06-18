@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<!--Update profile Form-->
+<div class="container">
+  {{wtf.quick_form(form)}} <!--wtf.quick_form() function from wtforms. Should I replace 'form' with 'UpdateProfile'-->
+</div>
+
+{% endblock %}
