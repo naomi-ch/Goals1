@@ -4,7 +4,7 @@ class Config:
     '''
     General Configuration parent class
     '''
-    #SECRET_KEY = os.environ.get('SECRET_KEY') for wtforms
+    SECRET_KEY = os.environ.get('SECRET_KEY') for wtforms
 
 
     #Email configurations
