@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %} <!-- should i remove?-->
+{% import bootstrap/wtf.html' as wtf %}
+
+<!--CONTENT BLOCK--> <!--we just want the full pitch to be displayed once we click the title-->
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      {{macro.displayFullPitch}}
+
+      <!--Display Comments--> 
+      {% if comment %} <!--should it be if comment.pitch_comments-->
+        <ul>{{macro.displayComments(comment)}}</ul>
+      {% else %}
+        <p>This pitch has no comments.</p>
+      {% endif %}
+    </div>
+
+    <!--Display comment form-->
+    <div class="col-md-4"> 
+      {{wtf.quick_form(comment_form)}}
+      <h3>Add a comment.</h3>
+    </div> 
+  </div>
+</div>
+{% endblock %}
