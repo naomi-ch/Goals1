@@ -4,6 +4,7 @@ from flask_login import UserMixin
 from . import login_manager
 from datetime import datetime
 #In watchlist there is a review class, for pitches make a view models potentially
+#Should i make a category model? where we can return a response in a 'get_category' def
 
 @login_manager.user_loader #decorator
 def load_user(user_id):
@@ -11,11 +12,35 @@ def load_user(user_id):
 
 
 #Pitch Model
-#class Pitch: #should there be db.Model?
-    #'''
-    #Pitch class to define Pitch objects
-    #'''
-    #def __init__(self,id,title,):
+class Pitch(db.Model): #should there be db.Model?
+    '''
+    Pitch class to define Pitch objects
+    '''
+    #all_pitches = []
+        #def __init__(self,id,user_username,title,pitch):
+        #self.id = id
+        #self.user_username = user_username
+        #self.title = title
+        #self.pitch = pitch
+    __tablename__ = 'pitch'
+    id = db.Column(db.Integer,primary_key = True)
+    user_username = db.Column(db.String)
+    title = db.Column(db.String)
+    pitch = db.Column(db.String)
+    
+    def save_pitch(self):
+          db.session.add(self)
+          db.session.commit()
+          #Pitch.all_pitches.append(self)
+
+    @classmethod
+    def clear_pitch(cls):
+        Pitch.all_pitches.clear() #this is for the test module. might have to alter this idk. 
+
+    @classmethod
+    def get_pitch(cls,id):
+        pitch = Pitch.query.filter_by(id = id).all()
+        return pitch 
 
 #User Model
 class User(UserMixin,db.Model): #helps us create new users
@@ -29,7 +54,6 @@ class User(UserMixin,db.Model): #helps us create new users
     email = db.Column(db.String(255), unique = True, index = True)
     bio = db.Column(db.String(255))
     #role id?
-    #bio?
     comments = db.relationship ('Comment',backref = 'user', lazy = "dynamic") #define relationship between user and comment?
     
     password_hash = db.Column(db.String(255))
