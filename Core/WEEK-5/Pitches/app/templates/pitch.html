@@ -7,21 +7,21 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      {{macro.displayFullPitch}}
-
+      <h2>{{macro.displayFullPitch}}</h2>
+      <hr>
       <!--Display Comments--> 
       {% if comment %} <!--should it be if comment.pitch_comments-->
         <ul>{{macro.displayComments(comment)}}</ul>
       {% else %}
-        <p>This pitch has no comments.</p>
+        <h4 class="text-center">This pitch has no comments.</h4>
+        <a class="btn btn-success btn-lg text-center" href="/pitch/comment/new/{{pitch.id}}">Add a comment.</a>
       {% endif %}
     </div>
 
-    <!--Display comment form-->
+    <!--Display comment form
     <div class="col-md-4"> 
-      {{wtf.quick_form(comment_form)}}
       <h3>Add a comment.</h3>
-    </div> 
+    </div>-->
   </div>
 </div>
 {% endblock %}
