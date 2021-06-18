@@ -15,6 +15,7 @@
 
 <!--Displaying full pitch once clicked on the title-->
 {% macro displayFullPitch(pitch) %} <!--takes in specific pitch. might have to write pitch_id-->
+
     {% for pitch in pitch_id %} <!-- might have to change this. we have to loop through the pitch. maybe for pitch in pitch? or for pitch_id in pitch.-->
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 fullPitch-card">
         <h2>{{pitch.title}}</h2>
@@ -22,13 +23,16 @@
         <p>{{pitch.pitch | truncate(20)}}</p> <!--might have to change the truncate or completely remove it -->
     </div> 
     {% endfor %}
+
 {% endmacro %}
 
 <!--Displaying comments to be put under fullpitch-->
 {% macro displayComments(comments) %} <!--takes in comments-->
+
     {% for comment in comments %}
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 comments-card">
         <ul>{{comment.pitch_comment}}</ul>
     </div>
     {% endfor %}
+
 {% endmacro %}
