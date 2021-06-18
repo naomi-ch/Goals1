@@ -4,8 +4,7 @@ class Config:
     '''
     General Configuration parent class
     '''
-    SECRET_KEY = os.environ.get('SECRET_KEY') for wtforms
-
+    SECRET_KEY = os.environ.get('SECRET_KEY') 
 
     #Email configurations
     MAIL_SERVER = 'smtp.googlemail.com' #set up SMTP server
@@ -14,12 +13,12 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
-    
-
 
     @staticmethod
     def init_app(app):
         pass
+
+
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://naomichika1:220197@localhost/pitches_test' # THIS IS POSTGRES TEST 
@@ -45,6 +44,7 @@ class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://naomichika1:220197@localhost/pitches'
 
     DEBUG = True
+
 
 config_options = {
     'development':DevConfig,
