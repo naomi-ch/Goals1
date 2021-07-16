@@ -7,14 +7,7 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div>
-    <h1>My Goals</h1>
-    <ul>
-        <li *ngFor = 'let goal of goals'>
-            {{goal}} 
-        </li>
-    </ul>
-</div>
+
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
@@ -25,3 +18,4 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <router-outlet></router-outlet>
+<app-goal></app-goal> <!--child component (goal component) nested inside parent component (app component)-->
