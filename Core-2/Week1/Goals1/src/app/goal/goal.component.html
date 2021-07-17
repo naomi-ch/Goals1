@@ -2,10 +2,11 @@
   <h1>My Goals</h1>
   <hr>
   <ul>
-      <li *ngFor = 'let goal of goals'>
-          {{goal.name}} 
-          <app-goal-detail [goal] = 'goal'></app-goal-detail> <!--specified that we are binding the 'goal' propoerty to the GOALDETAILCOMPONENT -->
-      </li>
+      <div *ngFor = 'let goal of goals; let i = index'> <!--added a loop logic,'let i = index' to register the index of each goal item in the goals list.-->
+          <li>{{goal.name}}</li>
+          <button (click) = 'toggleDetails(i)'>Toggle Details</button> <!--toggleDetails() function takes in the index position of the goal item as an argument.--> 
+          <app-goal-detail *ngIf = 'goal.showDescription' [goal] = 'goal' (isComplete) = 'completeGoal($event,i)'></app-goal-detail> <!--specified that we are binding the 'goal' propoerty to the GOALDETAILCOMPONENT -->
+      </div>
   </ul>
   <p *ngIf = 'goals.length > 5'>Your goals are too many!</p>
 </div>
