@@ -1,6 +1,6 @@
 export class Goal { //exported the class to make it available everywhere in the app whre we need it
-  showDescription: boolean; //'property showDescription'
-  constructor(public id: number, public name: string, public description: string){
+  public showDescription: boolean; //'property showDescription'
+  constructor(public id: number, public name: string, public description: string, public completeDate: Date){
     this.showDescription=false;
   }
 }
