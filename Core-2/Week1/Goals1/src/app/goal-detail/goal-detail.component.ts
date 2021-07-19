@@ -1,5 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Goal } from '../goal';
+import { ActivatedRoute } from '@angular/router'; //removed ParamMap
+import { GoalService } from '../goal-service/goal.service';
 
 @Component({
   selector: 'app-goal-detail',
@@ -8,20 +10,24 @@ import { Goal } from '../goal';
 })
 export class GoalDetailComponent implements OnInit {
 
-  @Input() goal!: Goal; //define 'goal' as the property that will undergo 'INPUT PROPERTY BINDING'. Of type 'GOAL'(from blueprint class)
-  @Output() isComplete = new EventEmitter<boolean>(); //eventemitter that takes in a boolean
+  goal!: Goal; //define 'goal' as the property that will undergo 'INPUT PROPERTY BINDING'. Of type 'GOAL'(from blueprint class)
 
 
 
-  goalDelete(complete:boolean){
-    this.isComplete.emit(complete); //calls 'emit' method on 'isComplete' eventemitter.
-                                    //this passes this event to the parent co
-  }
 
 
-  constructor() { }
+  constructor(private route:ActivatedRoute, private service:GoalService) { }
 
   ngOnInit(): void {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.goal = this.service.getGoal(id)
   }
 
 }
+
+
+//@Output() isComplete = new EventEmitter<boolean>(); //eventemitter that takes in a boolean
+//goalDelete(complete:boolean){
+  //this.isComplete.emit(complete); //calls 'emit' method on 'isComplete' eventemitter.
+  //this passes this event to the parent co
+//}

@@ -4,6 +4,7 @@ import { GoalService} from '../goal-service/goal.service';
 import { AlertService } from '../alert-service/alert.service';
 import { QuoteRequestService } from '../quote-http/quote-request.service';
 import { Quote } from '../quote-class/quote';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,10 @@ export class GoalComponent implements OnInit {
   alertService:AlertService;
   quote!: Quote;
 
-
+  
+  goToUrl(id) {
+    this.router.navigate(['/goals',id])
+  }
 
   addNewGoal(goal) {
     let goalLength = this.goals.length;
@@ -27,32 +31,19 @@ export class GoalComponent implements OnInit {
     this.goals.push(goal)
   }
 
-  
-  toggleDetails(index){
-    this.goals[index].showDescription = !this.goals[index].showDescription;
-  } 
-  
-  completeGoal(isComplete, index) {
-        if (isComplete) {
-          this.goals.splice(index,1);
-        
-      }
-  }
+    
 
-
-  deleteGoal(isComplete, index){
-    if (isComplete) {
+  deleteGoal(index){ //remove isComplete
       let toDelete = confirm(`Are you sure you want to delete ${this.goals[index].name}?`)
 
       if (toDelete) {
         this.goals.splice(index,1);
         this.alertService.alertMe("This goal has been deleted")
       }
-    }
   }
 
 
-  constructor(goalService:GoalService, alertService:AlertService, private quoteService:QuoteRequestService) { //to make service available in (goal) component, add it to constructor func & instantiate it inside func 
+  constructor(goalService:GoalService, alertService:AlertService, private quoteService:QuoteRequestService, private router:Router) { //to make service available in (goal) component, add it to constructor func & instantiate it inside func 
     this.goals = goalService.getGoals()
     this.alertService = alertService;
   }
@@ -63,3 +54,15 @@ export class GoalComponent implements OnInit {
   }
   
 }
+
+  //toggleDetails(index){
+    //this.goals[index].showDescription = !this.goals[index].showDescription;
+  //} 
+
+
+  //completeGoal(isComplete, index) {
+        //if (isComplete) {
+          //this.goals.splice(index,1);
+        
+      //}
+  //}
