@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Goal } from '../goal'; //imported 'Goal' blueprint class
 import { GoalService} from '../goal-service/goal.service';
 import { AlertService } from '../alert-service/alert.service';
+import { HttpClient } from '@angular/common/http';
+import { Quote } from '../quote-class/quote';
+
 
 @Component({
   selector: 'app-goal',
@@ -13,6 +16,7 @@ export class GoalComponent implements OnInit {
 
   goals:Goal[];
   alertService:AlertService;
+  quote!: Quote;
 
 
 
@@ -48,12 +52,24 @@ export class GoalComponent implements OnInit {
   }
 
 
-  constructor(goalService:GoalService, alertService:AlertService) { //to make service available in (goal) component, add it to constructor func & instantiate it inside func 
+  constructor(goalService:GoalService, alertService:AlertService, private http:HttpClient) { //to make service available in (goal) component, add it to constructor func & instantiate it inside func 
     this.goals = goalService.getGoals()
     this.alertService = alertService;
   }
 
   ngOnInit(): void {
+    interface ApiResponse { //defining an 'interface' to inform angular the kind of response we'll receive from the API
+      author:string;
+      quote:string;
+    }
+    this.http.get<ApiResponse>("http://quotes.stormconsultancy.co.uk/random.json").subscribe(data=> { //api request 
+      //Succesful API request
+      this.quote = new Quote(data.author, data.quote)
+    }, err=>{
+      this.quote = new Quote("Winston Churchill","Never never give up!")
+      console.log("An error occured")
+    })
+  
   }
 
 }
